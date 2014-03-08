@@ -35,7 +35,7 @@ public class LocatorFactoryImplEx extends AbstractLocatorFactory {
      */
     public LocatorFactoryImplEx(String pathPrefix) {
         super(pathPrefix);
-        log.warning("LocatorFactoryImplEx#Constructor: pathPrefix: " + pathPrefix);
+        log.warn("LocatorFactoryImplEx#Constructor: pathPrefix: " + pathPrefix);
 
     }
 
@@ -45,7 +45,7 @@ public class LocatorFactoryImplEx extends AbstractLocatorFactory {
      */
     @Override
     protected String getRepositoryPath(String resourcePath, String wspPath) {
-    	log.warning("LocatorFactoryImplEx#getRepositoryPath: resourcePath: " + resourcePath + " wspPath: " + wspPath);
+    	log.warn("LocatorFactoryImplEx#getRepositoryPath: resourcePath: " + resourcePath + " wspPath: " + wspPath);
         if (resourcePath == null) {
             return resourcePath;
         }
@@ -64,7 +64,7 @@ public class LocatorFactoryImplEx extends AbstractLocatorFactory {
      */
     @Override
     protected String getResourcePath(String repositoryPath, String wspPath) {
-    	log.warning("LocatorFactoryImplEx#getResourcePath: repositoryPath: " + repositoryPath + " wspPath: " + wspPath);
+    	log.warn("LocatorFactoryImplEx#getResourcePath: repositoryPath: " + repositoryPath + " wspPath: " + wspPath);
         if (repositoryPath == null) {
             throw new IllegalArgumentException("Cannot build resource path from 'null' repository path");
         }
