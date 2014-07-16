@@ -560,8 +560,6 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
             throw new IOException(e);
         }
         
-        
-        NoSuchAlgorithmException
     }
 
     /**
