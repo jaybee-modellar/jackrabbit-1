@@ -548,7 +548,9 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
                 }
             } while (numRead != -1);
             String result = String.valueOf(complete.digest());
-            log.info("MD5: " + result);
+            log.info("MD5neu: " + result);
+            log.info("PrimaryNodeType: " + node.getPrimaryNodeType().getName());
+            log.info("Name: " + node.getName());
             
             node.setProperty("modellarhash", result);
             
