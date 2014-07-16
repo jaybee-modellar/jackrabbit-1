@@ -79,6 +79,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -554,7 +555,13 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
         } catch (IOException e) {
             log.error("Error while importing resource: " + e.toString());
             throw new DavException(DavServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            log.error("Error while importing resource: " + e.toString());
+            throw new IOException(e);
         }
+        
+        
+        NoSuchAlgorithmException
     }
 
     /**
