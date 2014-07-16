@@ -552,8 +552,10 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
             log.info("PrimaryNodeType: " + node.getPrimaryNodeType().getName());
             log.info("Name: " + node.getName());
             log.info("member.getDisplayName: " + member.getDisplayName());
+            Node curNode = node.getNode(member.getDisplayName());
             
-            node.setProperty("modellarhash", result);
+            curNode.setProperty("modellarhash", result);
+            curNode.save();
             
             // persist changes after successful import
             node.save();
