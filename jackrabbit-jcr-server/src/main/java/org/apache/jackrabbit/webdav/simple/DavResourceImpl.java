@@ -563,7 +563,7 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
             throw new DavException(DavServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         } catch (NoSuchAlgorithmException e) {
             log.error("Error while importing resource: " + e.toString());
-            throw new IOException(e);
+            throw new DavException(DavServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
         
     }
