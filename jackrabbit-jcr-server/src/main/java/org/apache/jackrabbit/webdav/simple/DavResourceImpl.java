@@ -533,8 +533,7 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
                 // any changes should have been reverted in the importer
                 throw new DavException(DavServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
             }
-            // persist changes after successful import
-            node.save();
+            
             
             InputStream fis =  inputContext.getInputStream();
 
@@ -550,6 +549,12 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
             } while (numRead != -1);
             String result = String.valueOf(complete.digest());
             log.info("MD5: " + result);
+            
+            node.setProperty("modellarhash", result);
+            
+            // persist changes after successful import
+            node.save();
+            
         } catch (RepositoryException e) {
             log.error("Error while importing resource: " + e.toString());
             throw new JcrDavException(e);
@@ -558,9 +563,11 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
             throw new DavException(DavServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         } catch (NoSuchAlgorithmException e) {
             log.error("Error while importing resource: " + e.toString());
-            throw new DavException(DavServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            throw new IOException(e);
         }
         
+        
+        NoSuchAlgorithmException
     }
 
     /**
