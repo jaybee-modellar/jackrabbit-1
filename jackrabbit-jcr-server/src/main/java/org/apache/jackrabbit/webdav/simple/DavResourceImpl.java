@@ -74,8 +74,11 @@ import javax.jcr.Session;
 import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.Workspace;
 import javax.jcr.lock.Lock;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -531,6 +534,20 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
             }
             // persist changes after successful import
             node.save();
+            
+            InputStream fis =  inputContext.getInputStream();
+
+            byte[] buffer = new byte[1024];
+            MessageDigest complete = MessageDigest.getInstance("MD5");
+            int numRead;
+
+            do {
+                numRead = fis.read(buffer);
+                if (numRead > 0) {
+                    complete.update(buffer, 0, numRead);
+                }
+            } while (numRead != -1);
+            log.info("MD5: " + complete.digest());
         } catch (RepositoryException e) {
             log.error("Error while importing resource: " + e.toString());
             throw new JcrDavException(e);
