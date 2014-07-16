@@ -548,7 +548,8 @@ public class DavResourceImpl implements DavResource, BindableResource, JcrConsta
                     complete.update(buffer, 0, numRead);
                 }
             } while (numRead != -1);
-            log.info("MD5: " + complete.digest());
+            String result = String.valueOf(complete.digest());
+            log.info("MD5: " + result);
         } catch (RepositoryException e) {
             log.error("Error while importing resource: " + e.toString());
             throw new JcrDavException(e);
